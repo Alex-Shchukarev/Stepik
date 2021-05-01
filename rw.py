@@ -7,3 +7,4 @@ with open('C:\stepik\dataset_3333.txt', 'w') as wile:
     wile.write(spst)
 
 # Well Done
+# Prekrasno
