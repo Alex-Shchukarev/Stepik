@@ -10,3 +10,5 @@ for current_dir, dirs, files in os.walk('\main'):
 content = '\n'.join(sorted(spisok))
 with open('C:\stepik\dataset_3333_otv.txt', 'w') as wile:
     wile.write(content)
+
+# Well Done
