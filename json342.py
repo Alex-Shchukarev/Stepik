@@ -20,12 +20,18 @@
 
 import json
 
-def count_parents(elem):       #переделать
-    for symbol in elem:
-        if slovar_class[symbol] != '':
-            return 1 + count_parents(slovar_class[symbol])
-    else:
-        return 1
+def count_parents(elem):
+    buf_1, buf_2 = slovar_class[elem], []
+    while buf_1 != []:
+        for element in buf_1:
+            if element not in count_slovar_class:
+                count_slovar_class[element] = 1
+            else:
+                count_slovar_class[element] += 1
+            buf_2 += slovar_class[element]
+        buf_1, buf_2 = buf_2, []
+
+    return
 
 
 
@@ -38,7 +44,7 @@ py_slovar_class = json.loads(json_slovar_class)
 for slovar in py_slovar_class:
     key = slovar['name']
     value = slovar['parents']
-    slovar_class[key] = ''.join(value)
+    slovar_class[key] = value
 
 print(slovar_class)
 
@@ -51,7 +57,8 @@ for k, v in slovar_class.items():
         if elem not in count_slovar_class:
             count_slovar_class[elem] = 1
         else:
-            count_slovar_class[elem] += count_parents(elem) #переделать
+            count_slovar_class[elem] += 1
+            count_parents(elem)
 
 for k,v in sorted(count_slovar_class.items()):
     print(k, ':', v)
