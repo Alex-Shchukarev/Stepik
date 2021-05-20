@@ -48,26 +48,3 @@ for slovar in py_slovar_class:
 with_children = {element['name']: [] for element in py_slovar_class}
 print(slovar_class)
 print(with_children)
-
-# for k, v in slovar_class.items():
-#     if k not in count_slovar_class:
-#         count_slovar_class[k] = 1
-#     else:
-#         count_slovar_class[k] += 1
-#     for elem in v:
-#         if elem not in count_slovar_class:
-#             count_slovar_class[elem] = 1
-#         else:
-#             count_slovar_class[elem] += 1
-#             count_parents(elem)
-
-# for k, v in slovar_class.items():
-#     if k not in count_slovar_class:
-#         count_slovar_class[k] = 1
-#         count_parents(k)
-#     else:
-#         count_slovar_class[k] += 1
-#         count_parents(k)
-#
-# for k,v in sorted(count_slovar_class.items()):
-#     print(k, ':', v)
