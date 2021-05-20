@@ -40,13 +40,25 @@ token = for_token["token"]
 # создаем заголовок, содержащий наш токен
 headers = {"X-Xapp-Token" : token}
 # инициируем запрос с заголовком
-spisok_artists = dict()
-for _ in range(3):
-    name_id = input()
+with open(r"C:\stepik\dataset_24476_4.txt", encoding='UTF-8') as file:
+    name_artists = [line.strip() for line in file]
+
+spisok_artists = [[] for i in range(len(name_artists))]
+i = 0
+for name_id in name_artists:
     r = requests.get(f"https://api.artsy.net/api/artists/{name_id}", headers=headers)
     result = json.loads(r.text)
     name = result['sortable_name']
     year = result['birthday']
-    spisok_artists[name] = year
+    spisok_artists[i].append(year)
+    spisok_artists[i].append(name)
+    i += 1
 
-print(sorted(spisok_artists))
+sort_spisok = sorted(spisok_artists)
+print(sort_spisok)
+
+with open("C:\stepik\dataset_otvet_24476.txt", "w", encoding='UTF-8') as wfile:
+    for sp in sort_spisok:
+        name_artist = sp[1]
+        wfile.write(name_artist + '\n')
+
