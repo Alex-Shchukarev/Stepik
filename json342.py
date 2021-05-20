@@ -24,11 +24,11 @@ def count_parents(elem):
     buf_1, buf_2 = slovar_class[elem], []
     while buf_1 != []:
         for element in buf_1:
-            if element not in count_slovar_class:
+            if element not in count_slovar_class and set(slovar_class[element]) <= set(buf_1):
                 count_slovar_class[element] = 1
             else:
-                count_slovar_class[element] += 1
-            buf_2 += slovar_class[element]
+                count_slovar_class[element] = count_slovar_class.get(element,0) + 1
+                buf_2 += slovar_class[element]
         buf_1, buf_2 = buf_2, []
 
     return
@@ -45,20 +45,29 @@ for slovar in py_slovar_class:
     key = slovar['name']
     value = slovar['parents']
     slovar_class[key] = value
-
+with_children = {element['name']: [] for element in py_slovar_class}
 print(slovar_class)
+print(with_children)
 
-for k, v in slovar_class.items():
-    if k not in count_slovar_class:
-        count_slovar_class[k] = 1
-    else:
-        count_slovar_class[k] += 1
-    for elem in v:
-        if elem not in count_slovar_class:
-            count_slovar_class[elem] = 1
-        else:
-            count_slovar_class[elem] += 1
-            count_parents(elem)
+# for k, v in slovar_class.items():
+#     if k not in count_slovar_class:
+#         count_slovar_class[k] = 1
+#     else:
+#         count_slovar_class[k] += 1
+#     for elem in v:
+#         if elem not in count_slovar_class:
+#             count_slovar_class[elem] = 1
+#         else:
+#             count_slovar_class[elem] += 1
+#             count_parents(elem)
 
-for k,v in sorted(count_slovar_class.items()):
-    print(k, ':', v)
+# for k, v in slovar_class.items():
+#     if k not in count_slovar_class:
+#         count_slovar_class[k] = 1
+#         count_parents(k)
+#     else:
+#         count_slovar_class[k] += 1
+#         count_parents(k)
+#
+# for k,v in sorted(count_slovar_class.items()):
+#     print(k, ':', v)
